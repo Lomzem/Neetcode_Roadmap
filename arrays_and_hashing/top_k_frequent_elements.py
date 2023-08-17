@@ -18,10 +18,8 @@ class Solution:
         # could access it using k as index
         keys_list = sorted(list(sorted_counter.keys()), reverse=True)
         sorted_counter = {key: sorted_counter[key] for key in keys_list}
-
         sorted_values = list(sorted_counter.values())[:k]
 
         # deal with the issue of multiple nums having same occurence and only returning k nums
         flat_list = [in_list_item for in_list in sorted_values for in_list_item in in_list]
         return flat_list[:k]
-
