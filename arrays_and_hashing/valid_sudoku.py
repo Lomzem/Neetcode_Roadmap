@@ -2,22 +2,27 @@ import collections
 
 class Solution:
     def isValidSudoku(self, board: list[list[str]]) -> bool:
-        rows = collections.defaultdict(set)
-        cols = collections.defaultdict(set)
-        squares = collections.defaultdict(set)
+        # rows = [(5, 3, 7), (6, 1, 9, 5)]
+        # cols = [(5, 6)]
+        # squares = {(0, 0): (5, 3, 7)}
+
+        rows = [[] for _ in range(9)]
+        cols = [[] for _ in range(9)]
+        squares = collections.defaultdict(list)
 
         for row in range(9):
-            for col in range(9):
-                if board[row][col] == '.':
+            for cell in range(9):
+                if board[row][cell] == '.':
                     continue
 
-                if (board[row][col] in rows[row] or
-                    board[row][col] in cols[col] or
-                    board[row][col] in squares[(row // 3, col // 3)]):
+                cell_value = board[row][cell]
+                if (cell_value in rows[row] or
+                    cell_value in cols[cell] or
+                    cell_value in squares[(row // 3, cell // 3)]):
                     return False
 
-                rows[row].add(board[row][col])
-                cols[col].add(board[row][col])
-                squares[(row // 3, col // 3)].add(board[row][col])
+                rows[row].append(cell_value)
+                cols[cell].append(cell_value)
+                squares[(row // 3, cell // 3)].append(cell_value)
 
         return True
