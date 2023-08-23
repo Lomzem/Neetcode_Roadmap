@@ -1,8 +1,17 @@
 class Solution:
     def isPalindrome(self, s: str) -> bool:
-        if s % 2 != 0
-        beg_pointer = 0
-        end_pointer = len(s) - 1
+        s = s.lower()
+        allowed = '1234567890abcdefghijklmnopqrstuvwxyz'
+        allowed_string = ''.join([char for char in s if char in allowed])
 
-        for i in range(len(s) / 2):
-            
+        beg_pointer = 0
+        end_pointer = len(allowed_string) - 1
+
+        while beg_pointer < end_pointer:
+            if allowed_string[beg_pointer] != allowed_string[end_pointer]:
+                return False
+            beg_pointer += 1
+            end_pointer -= 1
+
+        return True
+
