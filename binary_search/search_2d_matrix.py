@@ -1,6 +1,5 @@
 class Solution:
     def searchMatrix(self, matrix: list[list[int]], target: int) -> bool:
-<<<<<<< HEAD
         for row in matrix:
             left = 0
             right = len(matrix) - 1
@@ -25,5 +24,3 @@ class Solution:
                         # return matrix[mid_v][mid_h]
                         return True
                 return False
-
->>>>>>> e03cf4039794b71a9d5022b56a4b21f403b01deb
