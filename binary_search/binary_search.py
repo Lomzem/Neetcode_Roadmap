@@ -13,5 +13,6 @@ class Solution:
 
         return -1
 
-result = Solution().search(nums = [-1,0,3,5,9,12], target = 9)
+
+result = Solution().search(nums=[-1, 0, 3, 5, 9, 12], target=9)
 print(result)

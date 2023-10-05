@@ -5,7 +5,6 @@ class Solution:
 
         while left <= right:
             mid = (left + right) // 2
-            print(nums[mid])
             if nums[mid] == target:
                 return mid
             
@@ -15,6 +14,7 @@ class Solution:
                     left = mid + 1
                 else:
                     right = mid - 1
+
             # We're in the section after the rotation
             else:
                 if target > nums[right] or target < nums[mid]:
@@ -24,9 +24,3 @@ class Solution:
 
         return -1
 
-result = Solution().search([1,3,5], 5)
-# [0,1,2,3,4]
-# result = Solution().search([4,5,6,7,0,1,2], 0)
-print('found', result)
-# result = Solution().search([1,3], 3)
-# print(result)
