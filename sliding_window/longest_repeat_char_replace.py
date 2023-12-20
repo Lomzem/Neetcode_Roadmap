@@ -1,4 +1,3 @@
-# Brute Force
 class Solution:
     def characterReplacement(self, s: str, k: int) -> int:
         # we want to get the longest substring where there are k-1 duplicates?
