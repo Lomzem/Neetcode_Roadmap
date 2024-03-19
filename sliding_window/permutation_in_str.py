@@ -19,5 +19,4 @@ class Solution:
             if i - l + 1 == len(s1):
                 if s1_counter == s2_counter:
                     return True
-
         return False
