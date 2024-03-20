@@ -11,6 +11,6 @@ class Solution:
         return result
 
 
-nums1 = [1,2,3,4]
-nums2 = [5,6,7,8,9]
+nums1 = [1, 2, 3, 4]
+nums2 = [5, 6, 7, 8, 9]
 assert Solution().findMedianSortedArrays(nums1, nums2) == 5

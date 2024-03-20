@@ -1,6 +1,6 @@
 class Solution:
     def evalRPN(self, tokens: list[str]) -> int:
-        operators = '+-*/'
+        operators = "+-*/"
         stack = []
 
         for token in tokens:
@@ -12,18 +12,16 @@ class Solution:
             num_1 = stack.pop()
 
             match token:
-
-                case '+':
+                case "+":
                     stack.append(num_1 + num_2)
 
-                case '-':
+                case "-":
                     stack.append(num_1 - num_2)
 
-                case '*':
+                case "*":
                     stack.append(num_1 * num_2)
 
-                case '/':
+                case "/":
                     stack.append(int(num_1 / num_2))
 
         return stack.pop()
-
