@@ -14,44 +14,60 @@ class LRUCache {
     int capacity;
     std::unordered_map<int, Node *> cache;
     // left is most recent
-    Node *left = new Node(0, 0);
+    Node *left;
 
     // right is least recent
-    Node *right = new Node(0, 0);
+    Node *right;
 
     void insert(Node *newNode) {
-        // adds node at left (most recent)
+        // adds node at left of linked list (most recent)
         Node *second(this->left->next);
         this->left->next = newNode;
         newNode->next = second;
+        newNode->prev = this->left;
         second->prev = newNode;
     }
 
     void remove(Node *removedNode) {
-        // removes node (not necessarily least recent)
+        // removes node from linked list (not necessarily least recent)
         removedNode->prev->next = removedNode->next;
         removedNode->next->prev = removedNode->prev;
-        delete removedNode;
     }
 
   public:
-    LRUCache(int capacity) : capacity(capacity) {
+    LRUCache(int capacity)
+        : capacity(capacity), left(new Node(0, 0)), right(new Node(0, 0)) {
+        this->left->next = this->right;
+        this->right->prev = this->left;
     }
 
     int get(int key) {
+        if (this->cache.find(key) != this->cache.end()) {
+            this->remove(this->cache[key]);
+            this->insert(this->cache[key]);
+            return this->cache[key]->value;
+        }
+        return -1;
     }
 
     void put(int key, int value) {
         // if key exists, delete it from linked list
-        if (cache.find(key) != cache.end()) {
-            remove(cache[key]);
+        if (this->cache.find(key) != this->cache.end()) {
+            this->remove(this->cache[key]);
+            delete cache[key];
+            this->cache.erase(key);
         }
+
+        while (this->cache.size() >= this->capacity) {
+            // right is least recent (right is actually a dummy node)
+            Node *lru(this->right->prev);
+            this->cache.erase(lru->key);
+            this->remove(lru);
+            delete lru;
+        }
+
+        Node *newNode = new Node(key, value);
+        this->insert(newNode);
+        this->cache[key] = newNode;
     }
 };
-
-/**
- * Your LRUCache object will be instantiated and called as such:
- * LRUCache* obj = new LRUCache(capacity);
- * int param_1 = obj->get(key);
- * obj->put(key,value);
- */
