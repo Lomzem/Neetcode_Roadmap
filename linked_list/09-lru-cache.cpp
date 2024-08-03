@@ -20,10 +20,18 @@ class LRUCache {
     Node *right = new Node(0, 0);
 
     void insert(Node *newNode) {
-        Node *second(left->next);
-        left->next = newNode;
+        // adds node at left (most recent)
+        Node *second(this->left->next);
+        this->left->next = newNode;
         newNode->next = second;
         second->prev = newNode;
+    }
+
+    void remove(Node *removedNode) {
+        // removes node (not necessarily least recent)
+        removedNode->prev->next = removedNode->next;
+        removedNode->next->prev = removedNode->prev;
+        delete removedNode;
     }
 
   public:
@@ -35,6 +43,9 @@ class LRUCache {
 
     void put(int key, int value) {
         // if key exists, delete it from linked list
+        if (cache.find(key) != cache.end()) {
+            remove(cache[key]);
+        }
     }
 };
 
